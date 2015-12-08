@@ -1,9 +1,9 @@
-# backbone.crossfilter
-A Crossfilter port to Backbone Framework.
-With backbone.crossfilter you can easily access the powerfull filter functions of <a href="http://square.github.io/crossfilter/">Crossfilter</a> within your <a href="http://backbonejs.org/">Backbone</a> app.
+# Backbone.Crossfilter
+_A Crossfilter port to Backbone Framework._
 
-For now it is working just if you use <a href="http://www.requirejs.org/">requirejs</a>
-It detects if you are using <a href="http://www.requirejs.org/">requirejs</a> or AMD like tools to set its dependencies.
+With backbone.crossfilter you can easily access the powerfull filter functions of [Crossfilter](http://square.github.io/crossfilter/) within your [Backbone](http://backbonejs.org/) app.
+
+It detects if you are using [requirejs](http://www.requirejs.org/) or AMD like tools to set its dependencies.
 If you don't have any of this tools, USE IT 
 or declare your scripts in that order:
 * ```<script src="/js/dependencies/jquery.js"></script>```
@@ -39,9 +39,9 @@ It gives you a collection of all the choices possible within the category you wa
 You will pass these collections to their views that you had already set up.
 
 ```javascript
-var auteursVue    = new CriteriaView({collection: myBCfilter.access("attribute1")}),
-	genresVue     = new CriteriaView({collection: myBCfilter.access("attribute2")}),
-	editionsVue   = new CriteriaView({collection: myBCfilter.access("attribute3")});
+var attribute1View    = new CriteriaView({collection: myBCfilter.access("attribute1")}),
+	attribute2View     = new CriteriaView({collection: myBCfilter.access("attribute2")}),
+	attribute3View   = new CriteriaView({collection: myBCfilter.access("attribute3")});
 ```
 
 ## The Criteria model
@@ -82,15 +82,15 @@ myBaseCollection.fetch({
 Now you gonna kick this collection's ass and filter it up your desires.
 If you keep your Backbone or Marionette views tight linked to your collections/models, whenever a criteria is clicked 
 your views are rendered automatically but maybe you want to update the data in your filtered collection manually.
-This is possible with the method myBCfilter.updateFilter().
+This is possible with the method ```myBCfilter.updateFilter()```.
 
 For convenience, you have access to the IDs of the filtered models in the base collection with the method ```myBCfilter.getSortedIDs()```.
 Like the name told it, they are sorted.
 
-## Enjoy ! \o/
+### Enjoy ! \o/
 
 ##ToDo
-* ~~ work without requirejs; ~~
+* ~~work without requirejs;~~
 * complete code traduction;
 * filter by single attribute with multiple values (tag system);
 * shorthand to sum of filtered/total items;
