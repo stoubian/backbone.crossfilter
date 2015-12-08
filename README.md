@@ -84,8 +84,8 @@ If you keep your Backbone or Marionette views tight linked to your collections/m
 your views are rendered automatically but maybe you want to update the data in your filtered collection manually.
 This is possible with the method ```myBCfilter.updateFilter()```.
 
-For convenience, you have access to the IDs of the filtered models in the base collection with the method ```myBCfilter.getSortedIDs()```.
-Like the name told it, they are sorted.
+For convenience, you have access to the IDs of the filter output models in the base collection with the method ```myBCfilter.getIDs()```.
+You can also retrieve the IDs of models that are _not_ at the output but in the base collection with the method ```myBCfilter.getInvIDs()```. 
 
 ### Enjoy ! \o/
 

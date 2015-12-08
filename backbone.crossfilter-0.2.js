@@ -1,9 +1,6 @@
 (function (window, factory) {
 	'use strict';
 
-	console.log('window ' , window);
-	console.log('factory ' , factory);
-
 	if (typeof define === 'function' && define.amd) {
 		define(['backbone', 'underscore', 'crossfilter'], function (Backbone, _) {
 			return factory(window, Backbone, _);
@@ -97,19 +94,33 @@
 					}));
 				});
 			});
+			this.get('filteredCollection').reset(moduleCF.get('baseCollection').models);
 			this.updateFilter();
 		},
 		updateFilter: function (){
-			this.set( 'donneesFiltrees', this.get('dimension')[this.get('config').attributs[0]].top(Infinity) );
-
-			var moduleCF = this,
+			var moduleCF     = this,
 				filterBuffer = [],
-				IDs = this.getSortedIDs();
+				baseIDs      = this.getIDs(this.get('filteredCollection').models),
+				fIDs         = this.getIDs();
 
-			_.each(IDs, function (id){
+			this.set('notFIDS', _.difference(baseIDs, fIDs));
+
+			_.each(fIDs, function (id){
+				if (_.indexOf(baseIDs, id) === -1){
+					moduleCF.get('filteredCollection').add(moduleCF.get('baseCollection').get(id));
+				}
+			});
+			_.each(this.get('notFIDS'), function (id){
+				if (_.indexOf(baseIDs, id) > -1){
+					moduleCF.get('filteredCollection').remove(moduleCF.get('baseCollection').get(id));
+				}
+			});
+
+/*			// weird behavior on removing all filters : 
+			_.each(fIDs, function (id){
 				filterBuffer.push(moduleCF.get('baseCollection').get(id));
 			});
-			this.get('filteredCollection').set(filterBuffer);
+			this.get('filteredCollection').set(filterBuffer, { merge: false });*/
 
 			//met à jour les sommes de critères
 			_.each(moduleCF.get('critereCollection'), function (collec){
@@ -145,7 +156,6 @@
 					moduleCF.get('dimension')[key].filterAll();
 				}
 			});
-
 			this.updateFilter();
 		},
 		FFhelper: function (maDim, monFA){
@@ -171,8 +181,14 @@
 		getFilterCollection: function (){
 			return this.get('filteredCollection');
 		},
-		getSortedIDs: function (){
-			return _.pluck(this.get('donneesFiltrees'), 'id').sort();
+		getIDs: function (list){
+			return _.pluck(
+				list || this.get('dimension')[this.get('config').attributs[0]].top(Infinity),
+				'id'
+			);
+		},
+		getInvIDs: function(){
+			return this.get('notFIDS');
 		},
 	});
 
