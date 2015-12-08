@@ -3,8 +3,16 @@ A Crossfilter port to Backbone Framework.
 With backbone.crossfilter you can easily access the powerfull filter functions of <a href="http://square.github.io/crossfilter/">Crossfilter</a> within your <a href="http://backbonejs.org/">Backbone</a> app.
 
 For now it is working just if you use <a href="http://www.requirejs.org/">requirejs</a>
+It detects if you are using <a href="http://www.requirejs.org/">requirejs</a> or AMD like tools to set its dependencies.
+If you don't have any of this tools, USE IT 
+or declare your scripts in that order:
+* ```<script src="/js/dependencies/jquery.js"></script>```
+* ```<script src="/js/dependencies/underscore.js"></script>```
+* ```<script src="/js/dependencies/backbone.js"></script>```
+* ```<script src="/js/dependencies/crossfilter.js"></script>```
+* ```<script src="/js/dependencies/backbone.crossfilter.js"></script>```
 
-# Instanciation of backbone.CrossFilter
+## Instanciation of backbone.CrossFilter
 ```javascript
 var myBCfilter = new backbone.crossfilter({
 	config: {
@@ -15,7 +23,7 @@ var myBCfilter = new backbone.crossfilter({
 
 Here you instantiate the filter with a configuration JSON which has an array "attributs" with the attributes you want to look at.
 
-# Reference to the filter output
+## Reference to the filter output
 Then, you instantiate the filtered collection with the method ```myBCfilter.getFilterCollection()``` wich return a Backbone collection,and you can do what you want with.
 For example, you can turn on the backbone comparator with one of your attributes and pass it to a view.
 
@@ -25,7 +33,7 @@ filteredCollection.comparator = 'attribute3';
 var myView = new View({collection: filteredCollection});
 ```
 
-# Accessing criterias' collections
+## Accessing criterias' collections
 Now you have set your filter and have a reference to the filter output "filteredCollection", you have access to backbone collections of criterias with the method ```myBCfilter.access("attribute")```.
 It gives you a collection of all the choices possible within the category you want to look at.
 You will pass these collections to their views that you had already set up.
@@ -36,7 +44,7 @@ var auteursVue    = new CriteriaView({collection: myBCfilter.access("attribute1"
 	editionsVue   = new CriteriaView({collection: myBCfilter.access("attribute3")});
 ```
 
-# The Criteria model
+## The Criteria model
 The Criteria model is build for you with this schema :
 
 ```javascript
@@ -61,7 +69,7 @@ myCriteriaView = Marionette.ItemView.extend({
 	},
 });
 ```
-# Unleash the power
+## Unleash the power
 if you have read this far and already tried to use this plugin, it has not worked !
 The final method you must use to complete the task is ```myBCfilter.buildFilter(myCollection)``` to pass the collection you want to filter to your backbone.crossfilter instance. I do it in the fetch's success callback to be sure I have the entire collection in my filter.
 ```javascript
@@ -79,11 +87,16 @@ This is possible with the method myBCfilter.updateFilter().
 For convenience, you have access to the IDs of the filtered models in the base collection with the method ```myBCfilter.getSortedIDs()```.
 Like the name told it, they are sorted.
 
-# Enjoy ! \o/
+## Enjoy ! \o/
 
-#ToDo
-work without requirejs;
-complete code traduction;
-filter by single attribute with multiple values (tag system);
-shorthand to sum of filtered/total items;
-shorthand to not(filteredItems);
+##ToDo
+* ~~ work without requirejs; ~~
+* complete code traduction;
+* filter by single attribute with multiple values (tag system);
+* shorthand to sum of filtered/total items;
+* shorthand to not(filteredItems);
+* unit tested;
+* better licence reflexion
+
+#LICENCE
+Apache v2.0
