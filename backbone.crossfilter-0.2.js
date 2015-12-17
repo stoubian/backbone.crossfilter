@@ -63,7 +63,6 @@
 			app.vent.on('livre:clic', function (donnees){
 				moduleCF.clicFiltre(donnees);
 			});
-			console.log('this ' , this);
 		},
 		buildFilter: function (collec){
 			var moduleCF = this,
@@ -189,6 +188,11 @@
 		},
 		getInvIDs: function(){
 			return this.get('notFIDS');
+		},
+		filterBy: function (dimension, attribute){
+			var result = this.get('dimension')[dimension].filterExact(attribute).top(Infinity);
+			var resultColl = new Backbone.Collection(result);
+			return resultColl;
 		},
 	});
 
