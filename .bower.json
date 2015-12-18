@@ -6,7 +6,7 @@
   "homepage": "https://github.com/jashkenas/backbone",
   "dependencies": {
     "backbone": "~1.2.3",
-    "crossfilter": "~1.3.12",
+    "crossfilter": "~1.3.12"
   },
   "keywords": [
     "javascript",
