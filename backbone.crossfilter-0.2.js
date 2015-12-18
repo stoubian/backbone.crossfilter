@@ -52,9 +52,9 @@
 			var CriteriaGroup = Backbone.Collection.extend({
 					model: this.get('criteria'),
 				}),
-				LivresFiltres = Backbone.Collection.extend();
+				FilteredCollection = Backbone.Collection.extend();
 
-			this.set('filteredCollection', new LivresFiltres() );
+			this.set('filteredCollection', new FilteredCollection());
 			this.set('config', opts.config);
 			_.each(this.get('config').attributs, function (att){
 				moduleCF.get('critereCollection')[att] = new CriteriaGroup();
@@ -190,8 +190,9 @@
 			return this.get('notFIDS');
 		},
 		filterBy: function (dimension, attribute){
-			var result = this.get('dimension')[dimension].filterExact(attribute).top(Infinity);
-			var resultColl = new Backbone.Collection(result);
+			var BaseCollectionConstructor = this.get('baseCollection').constructor,
+				result = this.get('dimension')[dimension].filterExact(attribute).top(Infinity),
+				resultColl = new BaseCollectionConstructor(result);
 			return resultColl;
 		},
 	});
