@@ -30,22 +30,18 @@
 			this.set('criteria', 
 				Backbone.Model.extend({
 					defaults: {
-						coche: false,
+						checked: false,
 						type: "NA",
 						nom: "NA",
 						nombre: "NA"
 					},
 					prepaF: function(){
-						if(this.get('coche')){
-							this.set('coche', false);
-						} else {
-							this.set('coche', true);
-						}
+						this.set('checked', !this.get('checked'));
 
 						var data = {
 							filtreType: this.get('type'),
 							filtreValeur: this.get('nom'),
-							filtreCoche: this.get('coche'),
+							filtreCoche: this.get('checked'),
 						};
 						moduleCF.setFiltre(data);
 					}
@@ -101,7 +97,7 @@
 		},
 		updateFilter: function (){
 			var moduleCF     = this,
-				filterBuffer = [],
+				// filterBuffer = [],
 				baseIDs      = this.getIDs(this.get('filteredCollection').models),
 				fIDs         = this.getIDs();
 
@@ -138,7 +134,6 @@
 		},
 		setFiltre: function (data){
 			var moduleCF = this;
-			var config = moduleCF.get('config').attributs;
 
 			if(data.filtreCoche){
 				moduleCF.get('filtresActifs')[data.filtreType].push(data.filtreValeur);

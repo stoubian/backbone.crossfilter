@@ -23,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/StephaneToubiana/backbone.crossfilter/issues"
   },
-  "homepage": "https://github.com/StephaneToubiana/backbone.crossfilter#readme"
+  "homepage": "https://github.com/StephaneToubiana/backbone.crossfilter#readme",
+  "dependencies": {
+    "backbone": "^1.3.2",
+    "crossfilter": "^1.3.12"
+  }
 }
