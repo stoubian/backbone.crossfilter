@@ -1,0 +1,27 @@
+{
+  "name": "backbone-crossfilter",
+  "version": "0.0.3",
+  "description": "An adaptation of Crossfilter to manage data with backbone collections",
+  "main": "backbone.crossfilter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StephaneToubiana/backbone.crossfilter.git"
+  },
+  "keywords": [
+    "backbone",
+    "crossfilter",
+    "filter",
+    "data",
+    "explore",
+    "collections"
+  ],
+  "author": "Stephane TOUBIANA",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/StephaneToubiana/backbone.crossfilter/issues"
+  },
+  "homepage": "https://github.com/StephaneToubiana/backbone.crossfilter#readme"
+}

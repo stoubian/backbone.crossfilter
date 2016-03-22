@@ -1,17 +1,20 @@
-(function (window, factory) {
+(function (root, factory) {
 	'use strict';
 
 	if (typeof define === 'function' && define.amd) {
-		define(['backbone', 'underscore', 'crossfilter'], function (Backbone, _) {
-			return factory(window, Backbone, _);
+		define(['backbone', 'underscore', 'crossfilter'], function (Backbone, _, Crossfilter) {
+			return factory(Backbone, _);
 		});
 	} else if (typeof exports !== 'undefined') {
-		module.exports = factory(window, require('Backbone'), require('underscore'), require('crossfilter'));
+		var Backbone 	= require('Backbone'),
+			_ 			= require('underscore'),
+			Crossfilter = require('crossfilter');
+		module.exports = factory(Backbone, _, Crossfilter);
 	} else {
-		factory(window, window.Backbone, window._);
+		factory(root.Backbone, root._, root.Crossfilter);
 	}
 
-}(this, function (window, Backbone, _) {
+}(this, function (Backbone, _, Crossfilter) {
 	'use strict';
 
 	Backbone.Crossfilter = Backbone.Model.extend({
@@ -115,7 +118,7 @@
 				}
 			});
 
-/*			// weird behavior on removing all filters : 
+			/*// weird behavior on removing all filters : 
 			_.each(fIDs, function (id){
 				filterBuffer.push(moduleCF.get('baseCollection').get(id));
 			});
